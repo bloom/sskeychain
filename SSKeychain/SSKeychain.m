@@ -21,7 +21,7 @@ NSString *const kSSKeychainWhereKey = @"svce";
 	static CFTypeRef SSKeychainAccessibilityType = NULL;
 #endif
 
-@implementation SSKeychain
+@implementation DOSSKeychain
 
 + (NSString *)passwordForService:(NSString *)serviceName account:(NSString *)account {
 	return [self passwordForService:serviceName account:account error:nil];
