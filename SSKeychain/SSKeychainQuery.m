@@ -78,9 +78,18 @@
 #else
 	CFTypeRef result = NULL;
 	[query setObject:@YES forKey:(__bridge id)kSecReturnRef];
+    [query setObject:@YES forKey:(__bridge id)kSecReturnAttributes];
 	status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);
-	if (status == errSecSuccess) {
-		status = SecKeychainItemDelete((SecKeychainItemRef)result);
+    if (status == errSecSuccess) {
+        CFDictionaryRef attributes = (CFDictionaryRef) result;
+
+        if (CFDictionaryGetValue(attributes, kSecAttrSynchronizable) != nil) {
+            status = SecItemDelete((__bridge CFDictionaryRef)query);
+        }
+        else {
+            SecKeychainItemRef keychainItem = (SecKeychainItemRef) CFDictionaryGetValue((CFDictionaryRef) result, kSecValueRef);
+            status = SecKeychainItemDelete(keychainItem);
+        }
 		CFRelease(result);
 	}
 #endif
