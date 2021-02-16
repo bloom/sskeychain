@@ -7,7 +7,7 @@
 //
 
 
-#import "SSKeychainQuery.h"
+#import <DOCore/SSKeychainQuery.h>
 
 /**
  Error code specific to SSKeychain that can be returned in NSError objects.
