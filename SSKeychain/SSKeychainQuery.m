@@ -188,7 +188,7 @@
 		[dictionary setObject:self.account forKey:(__bridge id)kSecAttrAccount];
 	}
 
-#if SSKEYCHAIN_ACCESSGROUP_AVAILABLE && !TARGET_IPHONE_SIMULATOR
+#if SSKEYCHAIN_ACCESSGROUP_AVAILABLE
 	if (self.accessGroup) {
 		[dictionary setObject:self.accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
 	}
