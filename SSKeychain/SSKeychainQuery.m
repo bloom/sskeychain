@@ -193,6 +193,10 @@
 		[dictionary setObject:self.accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
 	}
 #endif
+	
+	if (self.useDataProtectionKeychain) {
+		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain]
+	}
 
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
 	if ([[self class] isSynchronizationAvailable]) {

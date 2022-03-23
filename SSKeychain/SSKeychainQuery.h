@@ -75,6 +75,11 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
  */
 @property (nonatomic, copy) NSString *password;
 
+/**
+ Indicates whether to treat macOS keychain items like iOS keychain items.
+ */
+@property (nonatomic, assign) BOOL useDataProtectionKeychain;
+
 
 ///------------------------
 /// @name Saving & Deleting
