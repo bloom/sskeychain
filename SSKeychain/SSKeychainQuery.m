@@ -195,7 +195,7 @@
 #endif
 	
 	if (self.useDataProtectionKeychain) {
-		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain]
+		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
 	}
 
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
