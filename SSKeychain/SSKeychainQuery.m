@@ -194,8 +194,10 @@
 	}
 #endif
 	
-	if (self.useDataProtectionKeychain) {
-		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
+	if (@available(macOS 10.15, *)) {
+		if (self.useDataProtectionKeychain) {
+			[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
+		}
 	}
 
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
