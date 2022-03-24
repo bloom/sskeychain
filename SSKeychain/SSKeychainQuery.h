@@ -14,7 +14,7 @@
 	#define SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE 1
 #endif
 
-#if TARGET_OS_OSX && __MAC_10_15
+#if TARGET_OS_OSX && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_15)
 	// Legacy Keychain Mode is only available in macOS
 	#define SSKEYCHAIN_LEGACY_MODE_AVAILABLE 1
 #endif

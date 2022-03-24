@@ -46,8 +46,10 @@
 	output.synchronizationMode = self.synchronizationMode;
 #endif
 	
+#ifdef SSKEYCHAIN_LEGACY_MODE_AVAILABLE
 	output.legacyKeychainMode = self.legacyKeychainMode;
-	
+#endif
+
 	return output;
 }
 
