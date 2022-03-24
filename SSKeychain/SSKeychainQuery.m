@@ -194,11 +194,15 @@
 	}
 #endif
 	
+#if (TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE)
+	// NO-OP: Not required in iOS!
+#else
 	if (@available(macOS 10.15, *)) {
 		if (self.useDataProtectionKeychain) {
 			[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
 		}
 	}
+#endif
 
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
 	if ([[self class] isSynchronizationAvailable]) {
