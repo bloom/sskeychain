@@ -158,4 +158,10 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 + (BOOL)isSynchronizationAvailable;
 #endif
 
+
+/**
+ Indicates if the Legacy Keychain Mode is available
+ */
++ (BOOL)isLegacyModeAvailable;
+
 @end

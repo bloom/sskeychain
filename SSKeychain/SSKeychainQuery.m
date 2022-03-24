@@ -200,6 +200,14 @@
 }
 #endif
 
++ (BOOL)isLegacyModeAvailable {
+#if SSKEYCHAIN_LEGACY_MODE_AVAILABLE
+	return YES;
+#else
+	return NO;
+#endif
+}
+
 
 #pragma mark - Private
 
