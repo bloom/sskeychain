@@ -14,6 +14,11 @@
 	#define SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE 1
 #endif
 
+#if TARGET_OS_OSX && __MAC_10_15
+	// Legacy Keychain Mode is only available in macOS
+	#define SSKEYCHAIN_LEGACY_MODE_AVAILABLE 1
+#endif
+
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
 typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 	SSKeychainQuerySynchronizationModeAny,
@@ -75,10 +80,14 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
  */
 @property (nonatomic, copy) NSString *password;
 
+
+#ifdef SSKEYCHAIN_LEGACY_MODE_AVAILABLE
 /**
- Indicates whether to treat macOS keychain items like iOS keychain items.
+ When enabled, the Filesystem Based Keychain (Legacy!) will be used.
+ By default macOS will query the new DataProtection Keychain
  */
-@property (nonatomic, assign) BOOL useDataProtectionKeychain;
+@property (nonatomic, assign) BOOL legacyKeychainMode;
+#endif
 
 
 ///------------------------
