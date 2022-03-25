@@ -26,31 +26,6 @@
 
 #pragma mark - Public
 
-- (id)copyWithZone:(NSZone *)zone
-{
-	SSKeychainQuery *output = [self.class new];
-	output.account = self.account;
-	output.service = self.service;
-	output.label = self.label;
-	output.comment = self.comment;
-	
-#ifdef SSKEYCHAIN_ACCESSIBLE_AVAILABLE
-	output.accessibilityType = self.accessibilityType;
-#endif
-
-#if SSKEYCHAIN_ACCESSGROUP_AVAILABLE
-	output.accessGroup = self.accessGroup;
-#endif
-	
-#ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
-	output.synchronizationMode = self.synchronizationMode;
-#endif
-	
-	output.legacyKeychainMode = self.legacyKeychainMode;
-
-	return output;
-}
-
 - (BOOL)save:(NSError *__autoreleasing *)error {
 	OSStatus status = SSKeychainErrorBadArguments;
 	if (!self.service || !self.account || !self.passwordData) {
