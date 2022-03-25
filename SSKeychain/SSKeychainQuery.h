@@ -80,14 +80,11 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
  */
 @property (nonatomic, copy) NSString *password;
 
-
-#ifdef SSKEYCHAIN_LEGACY_MODE_AVAILABLE
 /**
  When enabled, the Filesystem Based Keychain (Legacy!) will be used.
  By default macOS will query the new DataProtection Keychain
  */
 @property (nonatomic, assign) BOOL legacyKeychainMode;
-#endif
 
 
 ///------------------------

@@ -46,9 +46,7 @@
 	output.synchronizationMode = self.synchronizationMode;
 #endif
 	
-#ifdef SSKEYCHAIN_LEGACY_MODE_AVAILABLE
 	output.legacyKeychainMode = self.legacyKeychainMode;
-#endif
 
 	return output;
 }
@@ -202,10 +200,12 @@
 
 + (BOOL)isLegacyModeAvailable {
 #if SSKEYCHAIN_LEGACY_MODE_AVAILABLE
-	return YES;
-#else
-	return NO;
+	if (@available(macOS 10.15, *)) {
+		return YES;
+	}
 #endif
+
+	return NO;
 }
 
 
@@ -230,8 +230,10 @@
 #endif
 	
 #if SSKEYCHAIN_LEGACY_MODE_AVAILABLE
-	if (self.legacyKeychainMode == NO) {
-		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
+	if (@available(macOS 10.15, *)) {
+		if (self.legacyKeychainMode == NO) {
+			[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
+		}
 	}
 #endif
 
