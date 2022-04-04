@@ -24,6 +24,15 @@
 @synthesize synchronizationMode = _synchronizationMode;
 #endif
 
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		_useModernKeychain = YES;
+	}
+
+	return self;
+}
+
 #pragma mark - Public
 
 - (BOOL)save:(NSError *__autoreleasing *)error {
@@ -205,10 +214,8 @@
 #endif
 	
 #if SSKEYCHAIN_LEGACY_MODE_AVAILABLE
-	if (@available(macOS 10.15, *)) {
-		if (self.legacyKeychainMode == NO) {
-			[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
-		}
+	if (self.useModernKeychain) {
+		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
 	}
 #endif
 
