@@ -14,6 +14,11 @@
 	#define SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE 1
 #endif
 
+#if TARGET_OS_OSX && (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_15)
+	// Legacy Keychain Mode is only available in macOS
+	#define SSKEYCHAIN_LEGACY_MODE_AVAILABLE 1
+#endif
+
 #ifdef SSKEYCHAIN_SYNCHRONIZATION_AVAILABLE
 typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 	SSKeychainQuerySynchronizationModeAny,
@@ -74,6 +79,13 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
  to `passwordData` using UTF-8 string encoding.
  */
 @property (nonatomic, copy) NSString *password;
+
+/**
+ When disabled, the Legacy macOS Filesystem-based Keychain will be used.
+ This is useful if you have existing data in the legacy keychain
+ and need to access it on newer systems.
+ */
+@property (nonatomic, assign) BOOL useModernKeychain;
 
 
 ///------------------------
@@ -143,5 +155,11 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
  */
 + (BOOL)isSynchronizationAvailable;
 #endif
+
+
+/**
+ Indicates if the Legacy Keychain Mode is available
+ */
++ (BOOL)isLegacyModeAvailable;
 
 @end

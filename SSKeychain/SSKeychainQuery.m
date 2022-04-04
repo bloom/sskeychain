@@ -24,6 +24,15 @@
 @synthesize synchronizationMode = _synchronizationMode;
 #endif
 
+- (instancetype)init {
+	self = [super init];
+	if (self) {
+		_useModernKeychain = YES;
+	}
+
+	return self;
+}
+
 #pragma mark - Public
 
 - (BOOL)save:(NSError *__autoreleasing *)error {
@@ -173,6 +182,16 @@
 }
 #endif
 
++ (BOOL)isLegacyModeAvailable {
+#if SSKEYCHAIN_LEGACY_MODE_AVAILABLE
+	if (@available(macOS 10.15, *)) {
+		return YES;
+	}
+#endif
+
+	return NO;
+}
+
 
 #pragma mark - Private
 
@@ -191,6 +210,12 @@
 #if SSKEYCHAIN_ACCESSGROUP_AVAILABLE
 	if (self.accessGroup) {
 		[dictionary setObject:self.accessGroup forKey:(__bridge id)kSecAttrAccessGroup];
+	}
+#endif
+	
+#if SSKEYCHAIN_LEGACY_MODE_AVAILABLE
+	if (self.useModernKeychain) {
+		[dictionary setObject:@(YES) forKey:(__bridge id)kSecUseDataProtectionKeychain];
 	}
 #endif
 
