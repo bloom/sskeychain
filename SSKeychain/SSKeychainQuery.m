@@ -250,52 +250,10 @@
 	NSString *message = nil;
 	switch (code) {
 		case errSecSuccess: return nil;
-		case SSKeychainErrorBadArguments: message = NSLocalizedStringFromTable(@"SSKeychainErrorBadArguments", @"SSKeychain", nil); break;
-
-#if TARGET_OS_IPHONE
-		case errSecUnimplemented: {
-			message = NSLocalizedStringFromTable(@"errSecUnimplemented", @"SSKeychain", nil);
-			break;
-		}
-		case errSecParam: {
-			message = NSLocalizedStringFromTable(@"errSecParam", @"SSKeychain", nil);
-			break;
-		}
-		case errSecAllocate: {
-			message = NSLocalizedStringFromTable(@"errSecAllocate", @"SSKeychain", nil);
-			break;
-		}
-		case errSecNotAvailable: {
-			message = NSLocalizedStringFromTable(@"errSecNotAvailable", @"SSKeychain", nil);
-			break;
-		}
-		case errSecDuplicateItem: {
-			message = NSLocalizedStringFromTable(@"errSecDuplicateItem", @"SSKeychain", nil);
-			break;
-		}
-		case errSecItemNotFound: {
-			message = NSLocalizedStringFromTable(@"errSecItemNotFound", @"SSKeychain", nil);
-			break;
-		}
-		case errSecInteractionNotAllowed: {
-			message = NSLocalizedStringFromTable(@"errSecInteractionNotAllowed", @"SSKeychain", nil);
-			break;
-		}
-		case errSecDecode: {
-			message = NSLocalizedStringFromTable(@"errSecDecode", @"SSKeychain", nil);
-			break;
-		}
-		case errSecAuthFailed: {
-			message = NSLocalizedStringFromTable(@"errSecAuthFailed", @"SSKeychain", nil);
-			break;
-		}
-		default: {
-			message = NSLocalizedStringFromTable(@"errSecDefault", @"SSKeychain", nil);
-		}
-#else
+        case SSKeychainErrorBadArguments:
+            message = @"Unexpected arguments to keychain function";
 		default:
 			message = (__bridge_transfer NSString *)SecCopyErrorMessageString(code, NULL);
-#endif
 	}
 
 	NSDictionary *userInfo = nil;
